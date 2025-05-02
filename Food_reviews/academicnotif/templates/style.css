@@ -1,0 +1,32 @@
+.result {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    padding: 20px;
+    border-radius: 12px;
+    width: 300px;
+    margin: 20px auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Sentiment specific colors */
+.positive {
+    background-color: #4caf50;
+    color: white;
+}
+
+.negative {
+    background-color: #f44336;
+    color: white;
+}
+
+.neutral {
+    background-color: #ff9800;
+    color: white;
+}
+
+/* Hover effect for smooth interaction */
+.result:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}

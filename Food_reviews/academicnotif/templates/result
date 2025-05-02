@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        {% if sentiment %}
+            {% if sentiment == 'Positive' %}
+                <div class="positive">
+                    <h2>Positive</h2>
+                </div>
+            {% elif sentiment == 'Negative' %}
+                <div class="negative">
+                    <h2>Negative</h2>
+                </div>
+            {% else %}
+                <div class="neutral">
+                    <h2>Neutral</h2>
+                </div>
+            {% endif %}
+        {% endif %}
+    </body>
+</html>

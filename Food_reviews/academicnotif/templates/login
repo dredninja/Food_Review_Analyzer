@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body style="background-color:aliceblue;">
+    <nav class="navbar navbar-expand-sm bg-light">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'post' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'workinprogress' %}">About</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <div class="container mt-5">
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data" style="border-radius: 10px;">
+            <h1 style="text-align: center;"><span style="color: purple;">Sentiment Review</span></h1>
+
+            {% csrf_token %}  
+
+            <h4 style="text-align: center;margin-top: 20px;">Login</h4>
+            <hr>
+
+            {% if messages %}
+            <div class="alert alert-primary" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="email">Username</label>
+                <input type="text" class="form-control" name="username" id="email" aria-describedby="emailHelp"
+                    placeholder="Enter username" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pass">Password</label>
+                <input type="password" name="password" class="form-control" id="pass" placeholder="Password" required>
+            </div>
+
+            <p>Don't have an account? <a href="/register/">Register</a> </p>
+
+            <button type="submit" class="btn btn-primary">Continue</button>
+        </form>
+    </div>
+</body>
+</html>

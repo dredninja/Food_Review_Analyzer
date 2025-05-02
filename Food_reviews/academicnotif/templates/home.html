@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <title>Sentiment Analysis - Food Delivery Reviews</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+  <div class="container-fluid">
+    <a class="navbar-brand text-primary fw-bold" href="{% url 'home' %}">Food Review Analyzer</a>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link text-primary" href="{% url 'home' %}">Home</a></li>
+        <li class="nav-item"><a class="nav-link text-primary" href="{% url 'login' %}">Login</a></li>
+        <li class="nav-item"><a class="nav-link text-primary" href="{% url 'register' %}">Register</a></li>
+        <li class="nav-item"><a class="nav-link text-primary" href="{% url 'workinprogress' %}">About</a></li>
+      </ul>
+
+      {% if username %}
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-success" href="#" data-bs-toggle="dropdown">Your Account</a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="{% url 'home' %}">Home</a></li>
+            <li><a class="dropdown-item" href="{% url 'post' %}">Analyse a File</a></li>
+            <li><a class="dropdown-item" href="{% url 'analyze' %}">Analyze a Review</a></li>
+            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+      {% else %}
+      <div class="d-flex align-items-center">
+        <p class="mb-0 me-2 text-muted">Not logged in?</p>
+        <form action="{% url 'login' %}">
+          <button type="submit" class="btn btn-success">Log In</button>
+        </form>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+
+<div class="container text-center mt-5">
+  <h1 class="display-4 fw-bold">Sentiment Analysis of Food Delivery Reviews</h1>
+  <p class="lead text-muted">Understand what customers really think about your service.</p>
+  <img src="{% static 'PieChart_sentiment.png' %}" class="img-fluid rounded shadow my-4" alt="Sentiment Chart" style="height: 400px; width: 500px;">
+</div>
+
+<div class="container my-5">
+  <div class="row align-items-center">
+    <div class="col-md-6">
+      <h2 class="fw-bold">What is Sentiment Analysis?</h2>
+      <p>
+        Sentiment Analysis is a natural language processing (NLP) technique used to determine
+        whether textual data is positive, negative, or neutral. In the context of food delivery services,
+        it helps identify customer satisfaction, areas for improvement, and emerging trends in feedback.
+      </p>
+    </div>
+    <div class="col-md-6">
+      <img src="{% static 'fig-2-2x.jpg' %}" class="img-fluid rounded shadow" alt="Sentiment Model" style="height: 300px; width: 300px; margin-left: 300px;">
+    </div>
+  </div>
+</div>
+
+<div class="container my-5">
+  <h2 class="text-center fw-bold mb-4">Key Features</h2>
+  <div class="row text-center">
+    <div class="col-md-4">
+      <h5>AI-Based Model</h5>
+      <p>Uses machine learning to classify reviews into positive, negative, and neutral categories.</p>
+    </div>
+    <div class="col-md-4">
+      <h5>Bulk File Analysis</h5>
+      <p>Upload Excel or CSV files and get instant sentiment reports for all entries.</p>
+    </div>
+    <div class="col-md-4">
+      <h5>Insights & Trends</h5>
+      <p>Track how sentiment evolves over time and identify key customer pain points.</p>
+    </div>
+  </div>
+</div>
+
+<div class="container text-center my-5">
+  {% if username %}
+    <h3 class="fw-bold">Welcome</h3>
+    <p class="text-muted">We're glad to have you back. Explore our features or analyze your reviews now.</p>
+    <a href="{% url 'post' %}" class="btn btn-primary me-2">Analyse a File</a>
+    <a href="{% url 'analyze' %}" class="btn btn-outline-success">Analyze a Review</a>
+  {% else %}
+    <h3 class="fw-bold">Start Analyzing Your Reviews Today</h3>
+    <p class="text-muted">Register or log in to analyze individual reviews or upload full datasets.</p>
+    <a href="{% url 'register' %}" class="btn btn-primary me-2">Register</a>
+    <a href="{% url 'login' %}" class="btn btn-outline-success">Log In</a>
+  {% endif %}
+</div>
+
+</body>
+</html>
+

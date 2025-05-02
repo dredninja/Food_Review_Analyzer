@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <title>Registration Form</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm bg-light">
+        <div class="container-fluid">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'workinprogress' %}">About</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <div class="container mt-5">
+        <form class="col-6 mx-auto card p-3 shadow-lg" method="post" enctype="multipart/form-data">
+            {% csrf_token %}  
+
+            <h1 style="text-align: center;"><span style="color: purple;">Sentiment Review</span></h1>
+            <h3 style="text-align: center; margin-top: 20px;">Register</h3>
+            <hr>
+
+            {% if messages %}
+            <div class="alert alert-primary" role="alert">
+                {% for message in messages %}
+                {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            <div class="form-group">
+                <label for="email">First name</label>
+                <input type="text" class="form-control" id="email" aria-describedby="emailHelp"
+                    placeholder="Enter First name" name="first_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Last name</label>
+                <input type="text" name="last_name" class="form-control" id="email"
+                    aria-describedby="emailHelp" placeholder="Enter Last name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Username</label>
+                <input type="text" class="form-control" name="username" id="mail"
+                    aria-describedby="emailHelp" placeholder="Enter email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pass">Password</label>
+                <input type="password" class="form-control" name="password" id="pass"
+                    placeholder="Password" required>
+            </div>
+
+            <p>Already have an account <a href="/login/">Login</a> </p>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

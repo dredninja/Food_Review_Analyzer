@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Reviews for Sentiment Analysis</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 650px;
+            text-align: center;
+        }
+        h1 {
+            color: #2c7a7b;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        input[type="file"], select {
+            font-size: 16px;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            width: 100%;
+        }
+        button {
+            background-color: #2c7a7b;
+            color: white;
+            font-size: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        button:hover {
+            background-color: #256a6c;
+        }
+        .delete-button {
+            background-color: #f44336;
+            margin-top: 5px;
+        }
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+        .uploaded-files {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            font-size: 16px;
+            text-align: left;
+        }
+        .back-button {
+            background-color: #ccc;
+            color: #333;
+            margin-top: 20px;
+        }
+        .back-button:hover {
+            background-color: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload Reviews for Sentiment Analysis</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="file" accept=".xlsx, .xls" required />
+            <button type="submit">Upload & Analyze</button>
+        </form>
+
+        {% if uploaded_files %}
+            <div class="uploaded-files">
+                <h3>Select an Uploaded File:</h3>
+                <form method="POST" action="{% url 'download_file' %}">
+                    {% csrf_token %}
+                    <select name="file_name">
+                        {% for file in uploaded_files %}
+                            <option value="{{ file }}">{{ file }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Download File</button>
+                </form>
+
+                <h3>Delete a File:</h3>
+                {% for file in uploaded_files %}
+                    <form method="POST" action="{% url 'delete_file' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="file_name" value="{{ file }}" />
+                        <button type="submit" class="delete-button">Delete {{ file }}</button>
+                    </form>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <a href="{% url 'home' %}"><button class="back-button">Back to Home</button></a>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
